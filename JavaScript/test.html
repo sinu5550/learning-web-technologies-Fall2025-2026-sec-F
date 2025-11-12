@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="head">JS Example</h1>
+    <input type="text" id="username" name="username" value="" >
+    <p id="uError"></p>
+    <input type="password" id="password" name="password" value="" >
+    <p id="pError"></p>
+    <input type="button" name="" value="Submit" onclick="test()">
+
+
+
+    <script>
+        // name = 'siyan';
+        // var name = 'siyan';
+        // let name = 'siyan';
+        // const name = 'siyan';
+
+        // let std = [1, ' siyan',2.5];
+
+        function test(){
+                //let head = document.getElementsByTagName('h1')[0];
+                let username = document.getElementById('username').value;
+                let pError = document.getElementById('pError');
+                let uError = document.getElementById('uError');
+                let password = document.getElementById('password').value;
+
+                if(username == ""){
+                    uError.innerHTML = "please type username first!";
+                    uError.style.color = 'red';
+                }
+                else if(password == ""){
+                    pError.innerHTML = "please type password first!";
+                    pError.style.color = 'red';
+                }else{
+                    document.getElementById('head').innerHTML = username;
+                    pError.innerHTML = "";
+                    uError.innerHTML = "";
+                }
+                
+                //let head = document.getElementById('head');
+                //head.innerHTML = username;
+
+                
+            }
+         
+    </script>
+</body>
+</html>
