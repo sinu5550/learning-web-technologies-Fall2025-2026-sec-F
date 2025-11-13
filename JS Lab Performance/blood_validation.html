@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="bloodGroupForm" onsubmit="return checkBloodGroup()">
+
+        <label>Blood Group:</label>
+        <select id="bloodGroup" name="bloodGroup">
+            <option value="">Select</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            
+        </select>
+
+        <hr>
+        <p id="eMsg"></p>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function checkBloodGroup() {
+            let bloodGroup = document.getElementById("bloodGroup").value;
+            let eMessage = document.getElementById("eMsg");
+            eMessage.style.color = "red";
+
+            if (bloodGroup === "") {
+                eMessage.innerHTML = "Please select a blood group.";
+                return false;
+            }
+
+            eMessage.innerHTML = "";
+            return true;
+        }
+    </script>
+</body>
+</html>

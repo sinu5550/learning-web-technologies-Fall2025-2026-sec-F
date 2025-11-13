@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date of Birth Validation</title>
+</head>
+
+<body>
+
+    <form id="dobForm" onsubmit="return checkDOB()">
+        <fieldset>
+            <legend>Date of Birth</legend>
+            <table>
+                <tr>
+                    <th>Day</th>
+                    <th></th>
+                    <th>Month</th>
+                    <th></th>
+                    <th>Year</th>
+                </tr>
+                <tr>
+                    <td><input type="text" id="day" name="day" size="2"></td>
+                    <td>/</td>
+                    <td><input type="text" id="month" name="month" size="2"></td>
+                    <td>/</td>
+                    <td><input type="text" id="year" name="year" size="4"></td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <p id="eMsg"></p><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+
+        function checkDOB() {
+
+            var day = document.getElementById("day").value.trim();
+            var month = document.getElementById("month").value.trim();
+            var year = document.getElementById("year").value.trim();
+            var eMessage = document.getElementById("eMsg");
+            eMessage.style.color = "red";
+
+            if (day === "" || month === "" || year === "") {
+                eMessage.innerHTML = "Date of Birth cannot be empty.";
+                return false;
+            }
+
+            if (isNaN(day) || isNaN(month) || isNaN(year)) {
+                eMessage.innerHTML = "Date of Birth must be a valid number.";
+                return false;
+            }
+
+            var dayNumber = parseInt(day, 10);
+            var monthNumber = parseInt(month, 10);
+            var yearNumber = parseInt(year, 10);
+
+            if (dayNumber < 1 || dayNumber > 31) {
+                eMessage.innerHTML = "Day must be between 1 and 31.";
+                return false;
+            }
+
+            if (monthNumber < 1 || monthNumber > 12) {
+                eMessage.innerHTML = "Month must be between 1 and 12.";
+                return false;
+            }
+
+            if (yearNumber < 1900 || yearNumber > 2016) {
+                eMessage.innerHTML = "Year must be between 1900 and 2016.";
+                return false;
+            }
+
+            eMessage.innerHTML = "";
+            return true;
+        }
+    </script>
+
+</body>
+
+</html>
