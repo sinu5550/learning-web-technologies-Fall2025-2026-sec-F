@@ -12,17 +12,24 @@
       <div class="buttons" id="buttons-container">
         <button class="clear">C</button>
         <button class="operator">÷</button>
-        <button class="operator">×</button>
+        <button class="operator">x</button>
         <button class="operator">-</button>
 
-        <div id="numberButton">
-            
-        </div>
+        <div id="numberButtons"></div>
       </div>
     </div>
 
     <script>
-      function makeNumberButtons() {}
+      function makeNumberButtons() {
+        const numButtons = document.getElementById("numberButtons");
+        for (i = 0; i < 10; i++) {
+          const btn = document.createElement("button");
+          btn.textContent = i;
+          btn.className = "number";
+          numButtons.appendChild(btn);
+        }
+      }
+      makeNumberButtons();
     </script>
   </body>
 </html>
