@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic JS</title>
+  </head>
+  <body>
+    <div>
+      <input type="text" id="labelText" />
+
+      <select name="fieldType" id="fieldType">
+        <option value="email">email</option>
+        <option value="password">password</option>
+        <option value="number">number</option>
+        <option value="text">text</option>
+        <option value="radio">radio</option>
+        <option value="gender">gender</option>
+      </select>
+
+      <input type="button" id="addFieldBtn" value="Add+" />
+
+      <div id="containerField"></div>
+
+      <input type="button" id="saveDataBtn" value="Save" />
+      <p id="errorMsg"></p>
+    </div>
+
+    <script>
+      const containerField = document.getElementById("containerField");
+      const addFieldBtn = document.getElementById("addFieldBtn");
+      const saveDataBtn = document.getElementById("saveDataBtn");
+
+      function createDynamicField() {
+        const chosenType = document.getElementById("fieldType").value;
+        const labelText = document.getElementById("labelText").value;
+
+        const wrapper = document.createElement("div");
+        const lbl = document.createElement("label");
+        const field = document.createElement("input");
+
+        lbl.textContent = labelText;
+
+        field.className = "inputBoxes";
+
+        if (chosenType === "radio" || chosenType === "gender") {
+          field.type = "radio";
+          field.name = labelText;
+        } else {
+          field.type = chosenType;
+        }
+
+        wrapper.appendChild(lbl);
+        wrapper.appendChild(field);
+        containerField.appendChild(wrapper);
+      }
+
+      addFieldBtn.addEventListener("click", createDynamicField);
+
+      function checkFormInputs() {
+        const eMsg = document.getElementById("errorMsg");
+        eMsg.textContent = "";
+        eMsg.style.color = "red";
+
+        const dynamicFields = document.getElementsByClassName("inputBoxes");
+
+        for (let i = 0; i < dynamicFields.length; i++) {
+          const currentField = dynamicFields[i];
+          const fieldType = currentField.type;
+          const fieldValue = currentField.value.trim();
+
+          if (fieldType === "number" && isNaN(fieldValue)) {
+            eMsg.textContent = "Please enter a valid number!";
+            return;
+          }
+
+          if (fieldType === "text" && fieldValue === "") {
+            eMsg.textContent = "Text field cannot be empty!";
+            return;
+          }
+
+          if (fieldType === "email") {
+            if (fieldValue === "") {
+              eMsg.textContent = "Email cannot be empty.";
+              return;
+            }
+
+            if (!(fieldValue.includes("@") && fieldValue.includes("."))) {
+              eMsg.textContent =
+                "Enter a valid email address (i.e anything@example.com).";
+              return;
+            }
+
+            const atPos = fieldValue.indexOf("@");
+            const dotPos = fieldValue.lastIndexOf(".");
+
+            if (
+              atPos < 1 ||
+              dotPos < atPos + 2 ||
+              dotPos + 2 >= fieldValue.length
+            ) {
+              eMsg.textContent =
+                "Enter a valid email address (i.e anything@example.com).";
+              return;
+            }
+          }
+
+          if (fieldType === "password" && fieldValue.length < 8) {
+            eMsg.textContent = "Password must be at least 8 characters!";
+            return;
+          }
+        }
+
+        eMsg.style.color = "green";
+        eMsg.textContent = "Saved successfully!";
+      }
+
+      saveDataBtn.addEventListener("click", checkFormInputs);
+    </script>
+  </body>
+</html>
